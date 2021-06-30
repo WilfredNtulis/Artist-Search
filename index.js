@@ -1,11 +1,18 @@
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var expressValidator = require('express-validator');
+var session = require('express-session');
 const express = require('express');
 var bodyParser = require('body-parser');
  var ejs = require('ejs');
 var db=require('./database');
+
 const app = express();
 const port = 3000;
+
 var search = "";
 
+app.use('/public', express.static('public'));
 var urlencodedParser = bodyParser.urlencoded({extended: false})
 app.set('view engine', "ejs");
 app.use(logger('dev'));
@@ -90,13 +97,15 @@ app.get('/all', function (req,res) {
 app.get('/name', function (req,res) {
   var search_name = search
   console.log(search_name)
-  var sql = 'SELECT * FROM artist WHERE name LIKE "%' + search_name + '%"';
+  
+  //SELECT * FROM artist WHERE  surname LIKE "ndlovu" or name like "ndlovu"
+  var sql = 'SELECT * FROM artist WHERE stagename LIKE "%' + search_name + '%"' + 'OR name LIKE "%' + search_name + '%"' ;
   db.query(sql, function(err, data, fields){
     if (err){
       console.log(err)
     }
     else if (data == ""){
-      res.render('search', {message: 'No records found of ' + search_name + ' try another name'} );
+      res.render('search', {message: 'No records found of ' + search_name + ' try another name',  form : false} );
     }
     else{
       res.render('all_artist', {results : data})
@@ -114,7 +123,7 @@ app.get('/province', function (req,res) {
       console.log(err)
     }
     else if (data == ""){
-      res.render('search', {message: 'No records found of ' + search_province + ' try another province'} );
+      res.render('search', {message: 'No records found of ' + search_province + ' try another province',  form : false } );
     }
     else{
       res.render('all_artist', {results : data})
@@ -132,7 +141,7 @@ app.get('/genre', function (req,res) {
       console.log(err)
     }
     else if (data == ""){
-      res.render('search', {message: 'No records found of ' + search_genre + ' try another genre'} );
+      res.render('search', {message: 'No records found of ' + search_genre + ' try another genre', form : false} );
     }
     else{
       res.render('all_artist', {results : data})
@@ -143,8 +152,31 @@ app.get('/genre', function (req,res) {
 
 //Home which is search page
 app.get('/', function(req, res){
-  res.render("search", {message : false})
+  if (req.session.loggedin){
+    res.render("search", {message : false, form : true })
+  }
+else {res.render("search", {message : false, form : false})}
 }),
+
+//delete
+app.get('/delete/:id', function(req, res){
+  var id = req.params['id']
+  var sql = 'DELETE FROM artist WHERE id = ' + id;
+
+  db.query(sql, function(err, data, fields){
+    if (err){
+      console.log(err)
+    }
+    else {
+    res.redirect("/")
+    }
+
+})})
+
+//Edit
+app.get('/edit', function(req, res){
+  res.render('formedit', {message : false});
+})
 
 //Retriving info from form
 app.post('/newartist',urlencodedParser, function(req, res){
@@ -152,11 +184,15 @@ app.post('/newartist',urlencodedParser, function(req, res){
   var surname = req.body.surname;
   var genre = req.body.genre;
   var province = req.body.province;
-  var contact = req.body.contact;
+  var address = req.body.address;
+  var email = req.body.email;
+  var phone = req.body.phone;
+  var stagename = req.body.stagename;
+  var namefull = name + " " + surname;
  // console.log(name+ surname+ genre+ province+ contact);
 
- var sql = 'INSERT INTO artist(name, surname, genre, province, contact) Values(?, ?, ?, ?, ?)';
-db.query(sql, [name, surname, genre, province, contact], function(err, data){
+ var sql = 'INSERT INTO artist(name, email, genre, province, address,  phonenumber, stagename) Values(?, ?, ?, ?, ?, ?, ?)';
+db.query(sql, [namefull, email, genre, province, address,  phone, stagename], function(err, data){
   if (err){
     res.render('form', {message : err})
   }
@@ -166,7 +202,7 @@ db.query(sql, [name, surname, genre, province, contact], function(err, data){
   })
  })
 
- // Retriving from form
+ // Retriving from search
  app.post('/search',urlencodedParser, function(req, res){
     var search_term = req.body.search
     var value = req.body.searchradio
@@ -176,8 +212,30 @@ db.query(sql, [name, surname, genre, province, contact], function(err, data){
     if(value == "Genre"){res.redirect("/Genre")}
  });
 
- 
+app.get('/details/:id', function(req, res){
+ var id = req.params['id']
+  var sql = "SELECT * FROM artist WHERE id = " + id
+  db.query(sql, function(err, data, fields){
+    if (err){
+      console.log(err)
+    }
+    else{
+      if (req.session.loggedin){
+        res.render("details", {results : data, form : true })
+      }
+   else{ res.render('details', {results : data, form: false})}
+     }
+    })
+  
+}) 
 
+ app.get("/test", function(req, res){
+  res.json({
+    "fruit": "Apple",
+    "size": "Large",
+    "color": "Red"
+})
+})
 //Start Server
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

@@ -1,0 +1,97 @@
+.heading{
+    color: blue;
+    font-size: 2.2em;
+    font-weight: 500; 
+  
+  }
+  nav{
+    background-color: rgb(245, 177, 74);
+    height: 70px;
+    margin-bottom: 5%;
+  }
+  #image1{
+    margin-right: 20px;
+    height: 60px;
+    width: 80px;
+  }
+  .whiteThing{
+    background-color: white;
+    padding:20px 80px 23px 5px;
+    margin-left: 25px;
+    height: 20px;
+  
+  }
+  #searchicon{
+    height: 30px;
+    width: 30px;
+  }
+  #bigimage{
+    height: 400px;
+    width: 750px;
+    
+  
+  }
+  #searchfield{
+    height: 50px;
+    width: 750px;
+    border: solid blue 3px;
+    border-radius: 20px;
+   
+  }
+  input::placeholder{
+    padding-left: 330px;
+    font-size: 1.3em;
+    font-weight: 500;
+  }
+  .radios{
+    margin: auto;
+    font-size: 1.3em;
+    font-weight: 500;
+    margin-bottom: 2%;
+    margin-top: 2%;
+  }
+  #submitbt{
+    margin: auto;
+    height: 40px;
+    width: 120px;
+    font-size: 1.2em;
+    background-color: white;
+  }
+  .genreradio{
+    margin-left: 210px;
+  }
+  .provinceradio{
+    margin-left: 240px;
+  }
+  .a{
+    margin-left: 5px;
+  }
+  input[type="radio"] {
+      
+      border: 2px solid 
+  }
+  .graphical-radio1 {
+      background: red;
+      display: inline-block;
+      width: 23px;
+      height: 23px;
+      border-radius: 100%;
+  }
+  .graphical-radio2 {
+      background: green;
+      display: inline-block;
+      width: 23px;
+      height: 23px;
+      border-radius: 100%;
+  }
+  .graphical-radio3 {
+      background: yellow;
+      display: inline-block;
+      width: 23px;
+      height: 23px;
+      border-radius: 100%;
+  }
+  .btn-outline-primary{
+      margin: auto;
+      margin-top: 25%;
+  }

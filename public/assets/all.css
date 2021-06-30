@@ -1,0 +1,62 @@
+.heading{
+  color: blue;
+  font-size: 2.2em;
+  font-weight: 500; 
+
+}
+nav{
+  background-color: rgb(245, 177, 74);
+  height: 70px;
+}
+#image1{
+  margin-right: 20px;
+  height: 60px;
+  width: 80px;
+}
+.whiteThing{
+  background-color: white;
+  padding:20px 80px 23px 5px;
+  margin-left: 25px;
+  height: 20px;
+
+}
+.dotted{
+  border: 6px dotted blue;
+  height: 300px;
+  width: 1200px;
+  margin-left: 70px;
+  font-style: italic;
+}
+.labels{
+  font-weight: 600;
+  font-size: 1.4em;
+}
+#full{
+  margin-left: 100px;
+}
+#genre{
+  margin-left: 100px;
+}
+#province{
+  margin-left: 100px;
+}
+#stage{
+  margin-left: 600px;
+}
+#contact{
+  margin-left: 650px;
+}
+#email{
+  margin-left:545px;
+}
+.tops{
+  margin-top: 40px;
+}
+#result{
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-left: 70px;
+  margin-bottom: 23px;
+  margin-top: 20px;
+  font-style: italic;
+}

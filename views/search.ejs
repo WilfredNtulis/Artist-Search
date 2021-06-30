@@ -1,36 +1,67 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="public/assets/search.css" rel="stylesheet">
 </head>
 <body>
-<!--====form section start====-->
+<!DOCTYPE html>
+<% if (message){ %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <%= message%>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% } %>
+
+<nav><span class="whiteThing"><img src="https://urbanculxure.com/wp-content/uploads/2019/04/NACZ.jpg" id="image1"><span class="heading">Search</span></span>
+<span style="float:right;">
+  <% if (form){ %>
+    <a href="/form"><button type="button" class="btn btn-outline-primary">Logout</button></a> 
+    <%} else {%>
+     <a href="/login"><button type="button" class="btn btn-outline-primary">Login</button></a> 
+     <%}%>
+    </span>
+</nav> 
 
 
-  <% if (message){ %>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <%= message%>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
- <% } %>
-  
- 
-
-
-<div>
+<div class="container">
+  <div class="text-center">
    <form action="/search" method="POST">
-              <input type="text" placeholder="Search" name="search">
-              <input type ="radio" name="searchradio" value="Name" checked> Name
-              <input type ="radio" name="searchradio" value="Genre"> Genre
-              <input type ="radio" name="searchradio" value="Province"> Province
-              <button type="submit" id="submitbt">Submit</button>
+            <div>
+              <input type="text" placeholder="Search" name="search" id="searchfield">
             </div>
+            <div class="radios">
+              <span class="nameradio">
+              <input type ="radio" name="searchradio" value="Name"  checked>
+              
+              <span class="a">Name</span>
+            </span>
+            <span class="genreradio">
+              <input type ="radio" name="searchradio" value="Genre" > 
+              
+              <span class="a">Genre</span>
+            </span>
+            <span class="provinceradio ">
+              <input type ="radio" name="searchradio" value="Province"> 
+              
+              <span class="a"> Province</span>
+            </span>
+            </div>
+              <div class="underbtn ">
+              <button type="submit" id="submitbt" >Search <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Search_Icon.svg/600px-Search_Icon.svg.png" id=searchicon></button>
+            </div>
+            </div>
+          </form> 
+<div class="text-center"  >
+  <img src="https://mbira.org/wp-content/uploads/2015/08/mbira.org-hands-on-mbira-homepage.jpg" id="bigimage" class="img-fluid" alt="Mbira" >
 </div>
+
+
+  
 </body>
 </html>

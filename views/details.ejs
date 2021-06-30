@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/public/assets/details.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> <!-- for IE and Android native browser support -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.js" integrity="sha512-mBSqtiBr4vcvTb6BCuIAgVx4uF3EVlVvJ2j+Z9USL0VwgL9liZ638rTANn5m1br7iupcjjg/LIl5cCYcNae7Yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.css" integrity="sha512-DYOwgMAsSbNzrSwEU3nQ7bcYo5aEqpIq1lOe5doeuUwXjuFYjIPvIZDZrEOH+QMIXvRpqcc8gPKcoIMIyAZMCg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<div class="container">
+
+    <%results.forEach(function(result){%>
+     <div id="myDiv" data-id = "<%= result.id %>" data-name = "<%= result.name %>" data-stagename = "<%= result.stagename %>"
+      data-genre="<%= result.genre %>" data-email ="<%= result.email %>" data-phone="<%= result.phonenumber%>" 
+      data-address ="<%= result.address %>" > </div>
+     <div>
+        <h2 > <%= result.name %> <%= result.stagename %> </h2>
+      <p> Province <%= result.province%> </p>
+      <p> Genre <%= result.genre%> </p>
+      <p>  <%= result.email%> </p>
+      <p>  <%= result.phonenumber%> </p> 
+      <p>  <%= result.address%> </p>
+        </div>
+   
+  </div>
+  <% if (form){ %>
+    <button id="delete">Delete</button >
+     <button id="edit">Edit</button>
+     <%}});%>
+
+     <script type="module">
+     import swal from 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.js'
+     window.onload = (event) => {
+   console.log("winloaded")
+   swal( "Your record is Safe !!!")
+ }
+    let edit = document.getElementById("edit")
+    let man = document.getElementById("myDiv")
+    let name = man.getAttribute("data-name")
+    var id = man.getAttribute("data-id")
+    var deletes = document.getElementById("delete");
+    deletes.addEventListener("click", function(){
+     swal({title : "Are you sure you want to delete",
+           text: "Once deleted you will not be able to recover this record",
+          icon : "warning",
+           buttons : true,
+          dangerMode : true, 
+        })
+          .then((willDelete) => {
+          if(willDelete){
+          swal("Poof! Your record has been deleted", {icon : "sucess",});
+          location.assign("/delete/ " + id)
+          } else{
+            swal( "Your record is Safe !!!")
+          }
+          })
+      })
+   edit.addEventListener("click", function(){
+    const person = {
+      name : name,
+      id : id
+    }
+    window.localStorage.setItem('person', JSON.stringify(person));
+    location.assign("/edit")
+   })
+     </script>
+  </body>
+</html>

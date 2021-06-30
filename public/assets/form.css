@@ -1,0 +1,83 @@
+.heading{
+	color: blue;
+	font-size: 2.2em;
+	font-weight: 500;	
+
+}
+nav{
+	background-color:rgb(245, 177, 74);
+	height: 70px;
+}
+img{
+	margin-right: 20px;
+	height: 60px;
+	width: 80px;
+}
+.whiteThing{
+	background-color: white;
+	padding:20px 80px 23px 5px;
+	margin-left: 25px;
+	height: 20px;
+
+}
+.label{
+	background-color: blue;
+	padding-top: 17px;
+	padding-bottom: 17px;
+	margin-right: 0px;
+	padding-right: 20px;
+	border-right: none;
+	margin-left: 320px;
+	font-size: 1.2em;
+	color: white;
+
+}
+input{
+	border-left: none;
+	width: 350px;
+	height: 60px;
+	padding-left: 10px;
+	margin-left: 0px;
+	font-size: 1.2em;
+
+}
+.column{
+	margin-top: 20px;
+}
+#labelFullname{
+	padding-right: 39px;
+	padding-left: 40px;
+}
+#labelstagename{
+	padding-right: 31px;
+	padding-left: 30px;
+}
+#labelgenre{
+	padding-right: 70px;
+	padding-left: 47px;
+}
+#labelnumber{
+	padding-right: 20px;
+	padding-left: 10px;
+}
+#labelprovince{
+		padding-right:49px ;
+		padding-left: 37px;
+
+}
+#submitbt{
+	margin-top: 30px;
+	margin-left: 950px;
+	border: none;
+	background-color: green;
+	height: 35px;
+	width: 80px;
+	font-size: 1.1em;
+	font-weight: 500;
+	color: white;
+}
+#labelemail{
+		padding-right: 74px;
+		padding-left: 47px;
+
+}
