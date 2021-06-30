@@ -8,6 +8,64 @@ var search = "";
 
 var urlencodedParser = bodyParser.urlencoded({extended: false})
 app.set('view engine', "ejs");
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(session({ 
+    secret: '123456cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 }
+}))
+ app.use(expressValidator());
+ 
+//end
+
+ 
+//display login page
+app.get('/login', function(req, res){    
+    // render to views/user/add.ejs
+    res.render('login', {
+        title: 'Login',
+        email: '',
+        password: '' , 
+        message: false
+    })
+})
+ 
+ 
+//authenticate user
+app.post('/login', function(req, res) {
+       
+    var email = req.body.email;
+    var password = req.body.password;
+ 
+        db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], function(err, rows, fields) {
+            if(err) throw err
+             
+            // if user not found
+            if (rows.length <= 0) {
+            res.redirect('/login')
+            }
+            else { // if user found
+                
+                req.session.loggedin = true;
+                //req.session
+                res.redirect('/');
+ 
+            }            
+        })
+  
+})
+ 
+ 
+// Logout user
+app.get('/', function (req, res) {
+  req.session.destroy();
+  res.redirect('/login');
+});
+
 
 // Rendering form
 app.get('/form', function (req,res) {res.render('form',{message: false});});
