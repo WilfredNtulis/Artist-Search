@@ -127,7 +127,7 @@ input{
       .banner {
       position: relative;
       height: 320px;
-      background-image: url("/uploads/media/default/0001/02/19ea6ba00def11fb8f5113a4d7555a97bd58ce3d.jpeg");  
+      background-image: url("/public/assets/sing.jpg");  
       background-size: cover;
       display: flex;
       justify-content: center;
