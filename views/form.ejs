@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="/public/assets/form.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="public/assets/form.css">
+  <link href="public/assets/search.css" rel="stylesheet">
+  <link rel="stylesheet" href="/public/assets/form.css">
+  
 </head>
 <body>
 <!--====form section start====-->
 
 
  <% if (message){ %>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
       <%= message%>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -21,46 +24,195 @@
     </div>
  <% } %>
   
- <nav><span class="whiteThing"><img src="https://urbanculxure.com/wp-content/uploads/2019/04/NACZ.jpg" id="image1"><span class="heading">Search</span></span>
-   
-  </nav>
+ <nav><span class="whiteThing"><a href="/"><img src="https://urbanculxure.com/wp-content/uploads/2019/04/NACZ.jpg" id="image1"></a><span class="heading">Form</span></span>
+  <span style="float:right;">
+    <% if (form){ %>
+      <a href="/form"><button type="button" class="btn btn-outline-primary">Form</button></a>
+      <a href="/logout"><button type="button" class="btn btn-outline-primary">Logout</button></a> 
+      <%} else {%>
+       <a href="/login"><button type="button" class="btn btn-outline-primary">Login</button></a> 
+       <%}%>
+      </span>
+  </nav> 
 
-<div class="artist-detail" id="top">
-  <div class="jumbotron">
-  <h1 class="display-4">Create Artist Data </h1>
 
-  </div>
-
-  <div class="artist-detail">
-    <form action="/newartist" method="POST">
-		<div class="column">
-          <span class="label" id="labelFullname"><label>FULLNAME</label></span>
-          <span class="input"><input type="text" placeholder="Mukudzeyi Mukombe" name="name" required></span>
-      	</div>
-      	<div class="column">
-          <span class="label" id="labelstagename"><label>STAGE NAME</label></span>
-          <span class="input"><input type="text" placeholder="Jah Prayzah" name="surname" required></span>
-        </div>
-        <div class="column">
-          <span class="label" id="labelgenre"><label>GENRE</label></span>
-        <span class="input">  <input type="text" placeholder="sungura" name="genre" required></span>
-        </div>
-        <div class="column">
-          <span class="label" id="labelnumber"><label>PHONE NUMBER</label></span>
-          <span class="input"><input type="text" placeholder="Mashonaland" name="province" required></span>
-        </div>
-        <div class="column">
-          <span class="label" id="labelprovince"><label>PROVINCE</label></span>
-          <span class="input"> <input type="text" placeholder="0772 000 000" name="contact" required></span>
-        </div>
-      	<div class="column">
-  		  <span class="label" id="labelemail"><label>EMAIL</label></span>
-          <span class="input"> <input type="text" placeholder="Username01@gmail.com" name="email" required></span>
-     	</div>
-       <div>   <button type="submit" id="submitbt">Submit</button></div>
+ 
+    <button id="tab1but">Individual</button> <button id="tab2but">Organasation</button>
+    <div id="tab1">
+      <div class="testbox">
+  <form action="/newartist" method="POST">
+    <div class="banner">
+      <h1>Artist Data Form</h1>
+    </div>
+    <p>Please fill out with the information that is requested below and submit the form. Thank you!</p>
+    <hr/>
+    <fieldset>
+      
+    <legend>Artist Information</legend>
+    <div class="item">
+    <label for="name">Name<span>*</span></label>
+    <div class="name-item">
+    <input id="name" type="text" name="name" placeholder="First" required/>
+    <input id="name" type="text" name="surname" placeholder="Last" required/>
+    </div>
+    </div>
+    <div class="item">
+      <label for="phone">Phone<span>*</span></label>
+      <div class="name-item">
+      <input id="phone" type="text" name="phone" placeholder="For call" required/>
+      <input id="phone" type="text" name="app" placeholder="For What's app" />
+      </div>
+      </div>
+    <div class="item">
+    <label for="email">Email<span>*</span></label>
+    <input id="email" type="text" name="email" required/>
+    </div>
+    <div class="item">
+    <label for="position">Stage Name<span>*</span></label>
+    <input id="position" type="text" name="stagename" required />
+    </div>
+    <div class="item">
+      <label for="province">Choose your province from the list:<span>*</span></label>
+      <select  name="province" id="province" required>
+      
+        <option selected value="" disabled selected >Province</option>
+        <option value="Mashonaland">Mashonaland</option>
+        <option value="Matebeland South">Matebeland South</option>
+        <option value="Matebeland North">Matebeland North</option>
+        <option value="Harare">Harare</option>
+        <option value="Bulawayo">Bulawayo</option>
+        <option value="Midlands">Midlands</option>
+        <option value="Manicaland">Manicaland</option>
        
-     </form>
+      </select>
+      </div>
+      <div class="item">
+        <label for="Categories">Choose your category from the list:<span>*</span></label>
+        <select list="category" name="category" id="categories" required>
+        
+         <option selected value="" disabled selected >Category</option>
+          <option value="Spoken Word">Spoken Word</option>
+          <option value="Dance Choreographers">Dance Choreographers</option>
+          <option value="Dancers">Dancers</option>
+          <option value="Dance groups/ Ensembles">Dance groups/ Ensembles</option>
+          <option value="Visual Arts">Visual Arts</option>
+          <option value="Literary">Literary</option>
+          <option value="Theatre">Theatre</option>
+          <option value="Film and Television">Film and Television</option>
+          <option value="Music">Music</option>
+        </select>
+        </div>
+        
+        <div class="item">
+          
+          <label for="genres">Choose your genre from the list:<span>*</span></label>
+          <select list=" " name="genre" id="genres"></select>
+          <option selected value="" disabled selected >Genre</option>
+        </div>
+        <div class="item">
+          <input id="language" type="hidden" name="language" placeholder="Language of literature"  required/>
+        </div>
+    <div class="item">
+        <label for="address">Profile<span>*</span></label>
+        <input id="address" type="text" name="address" placeholder="Profile" required/>
+      </div>
+      <legend>Social handles</legend>
+      <div class="item">
+        <label for="handle">Optional</label>
+        <div class="name-item">
+        <input id="handle" type="text" name="twitter" placeholder="Twitter Url" />
+        <input id="handle" type="text" name="facebook" placeholder="Facebook Url" required/>
+        <input id="handle" type="text" name="instagram" placeholder="Instagram Url" required/>
+        </div>
+        </div>
+    <fieldset>
+    <div class="btn-block">
+    <button type="submit" >Submit</button>
+    </div>
+  </form>
+  </div>
 </div>
-<a href="/"> <button id="submitbtn"> Cancel</button></a>
-</body>
+    
+    
+   
+
+<div id="tab2">
+    <div class="testbox">
+        <form action="/neworg" method="POST">
+          <div class="banner">
+            <h1>Organasation Data Form</h1>
+          </div>
+          <p>Please fill out with the information that is requested below and submit the form. Thank you!</p>
+          <hr/>
+          <fieldset>
+            
+          <legend>Organasation Information</legend>
+          <div class="item">
+            <label for="address">Company Name<span>*</span></label>
+            <input id="address" type="text" name="companyname" placeholder="Company Name" required/>
+          </div>
+          <div class="item">
+          <label for="name">Name of Director/Manager/Curator<span>*</span></label>
+          <div class="name-item">
+          <input id="name" type="text" name="name" placeholder="First" required/>
+          <input id="name" type="text" name="surname" placeholder="Last" required/>
+          </div>
+          </div>
+          <div class="item">
+          <label for="bdate">Contact number<span>*</span></label>
+          <input id="bdate" type="text" name="phone" required/>
+          </div>
+          <div class="item">
+          <label for="email">Organasation Email<span>*</span></label>
+          <input id="email" type="text" name="email" required/>
+          </div>
+          <div class="item">
+            <label for="province">Choose your province from the list:<span>*</span></label>
+            <select  name="province" id="province" required>
+            
+              <option selected value="" disabled selected >Province</option>
+              <option value="Mashonaland">Mashonaland</option>
+              <option value="Matebeland South">Matebeland South</option>
+              <option value="Matebeland North">Matebeland North</option>
+              <option value="Harare">Harare</option>
+              <option value="Bulawayo">Bulawayo</option>
+              <option value="Midlands">Midlands</option>
+              <option value="Manicaland">Manicaland</option>
+             
+            </select>
+            </div>
+            <div class="item">
+              <label for="Categories">Choose your category from the list:<span>*</span></label>
+              <select  name="category" id="category" required>
+              
+                <option selected value="" disabled selected >Category</option>
+                <option value="Festivals">Festivals</option>
+                <option value="Associate Affiliates">Associate Affiliates</option>
+                <option value="Promoters">Promoters</option>
+                <option value="Arts and Heritange Centers">Arts and Heritange Centers</option>
+             
+              </select>
+              </div>
+              
+              <div class="item">
+              <label for="address">Company <span>*</span></label>
+              <input id="address" type="text" name="address" placeholder="Company Address" required/>
+            </div>
+            <legend>Social handles</legend>
+            <div class="item">
+              <label for="handle">Optional</label>
+              <div class="name-item">
+              <input id="handle" type="text" name="website" placeholder="Website Url" />
+              <input id="handle" type="text" name="twitter" placeholder="Twitter Url" />
+              <input id="handle" type="text" name="facebook" placeholder="Facebook Url" />
+              <input id="handle" type="text" name="instagram" placeholder="Instagram Url"/>
+              </div>
+          <fieldset>
+          <div class="btn-block">
+          <button type="submit" >Submit</button>
+          </div>
+        </form>
+        </div>
+    </div>
+  </body>
 </html>

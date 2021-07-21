@@ -36,6 +36,7 @@
     width: 750px;
     border: solid blue 3px;
     border-radius: 20px;
+    margin-top: 2%;
    
   }
   input::placeholder{
@@ -92,6 +93,16 @@
       border-radius: 100%;
   }
   .btn-outline-primary{
-      margin: auto;
-      margin-top: 25%;
-  }
+      
+      margin-top: 10%;
+    }
+    .topbtn {
+      width: 150px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px; 
+      background: #095484;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      }

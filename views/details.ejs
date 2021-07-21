@@ -9,65 +9,312 @@
 <link rel="stylesheet" href="/public/assets/details.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> <!-- for IE and Android native browser support -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.js" integrity="sha512-mBSqtiBr4vcvTb6BCuIAgVx4uF3EVlVvJ2j+Z9USL0VwgL9liZ638rTANn5m1br7iupcjjg/LIl5cCYcNae7Yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="/public/assets/search.css" >
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.css" integrity="sha512-DYOwgMAsSbNzrSwEU3nQ7bcYo5aEqpIq1lOe5doeuUwXjuFYjIPvIZDZrEOH+QMIXvRpqcc8gPKcoIMIyAZMCg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-<div class="container">
 
-    <%results.forEach(function(result){%>
-     <div id="myDiv" data-id = "<%= result.id %>" data-name = "<%= result.name %>" data-stagename = "<%= result.stagename %>"
-      data-genre="<%= result.genre %>" data-email ="<%= result.email %>" data-phone="<%= result.phonenumber%>" 
-      data-address ="<%= result.address %>" > </div>
-     <div>
-        <h2 > <%= result.name %> <%= result.stagename %> </h2>
-      <p> Province <%= result.province%> </p>
-      <p> Genre <%= result.genre%> </p>
-      <p>  <%= result.email%> </p>
-      <p>  <%= result.phonenumber%> </p> 
-      <p>  <%= result.address%> </p>
-        </div>
+
+    <nav><span class="whiteThing"><a href="/"><img src="https://urbanculxure.com/wp-content/uploads/2019/04/NACZ.jpg" id="image1"></a><span class="heading">Search</span></span>
+        <span style="float:right;">
+          <% if (form){ %>
+            <a href="/form"><button type="button" class="btn btn-outline-primary">Form</button></a>
+            <a href="/logout"><button type="button" class="btn btn-outline-primary">Logout</button></a> 
+            <%} else {%>
+             <a href="/login"><button type="button" class="btn btn-outline-primary">Login</button></a> 
+             <%}%>
+            </span>
+        </nav> 
    
-  </div>
-  <% if (form){ %>
-    <button id="delete">Delete</button >
-     <button id="edit">Edit</button>
+  
+
+    <%results.forEach(function(result){
+        if(result.name != null) {%>
+     <div id="data" data-id="<%= result.id %>"  data-name="<%= result.name %>"  data-genre="<%= result.genre %>" data-email="<%= result.email %>" data-phone="<%= result.phonenumber %>" data-address="<%= result.address %>" data-category="<%= result.category %>"
+        data-stagename="<%= result.stagename %>" data-language="<%= result.language %>"  data-twitter="<%= result.twitter %>"  data-facebook ="<%= result.facebook %>"  data-instagram="<%= result.instagram %>"  data-province="<%= result.province %>" >
+
+     </div>
+        <div class="container emp-profile">
+        
+            <div class="row">
+                
+                <div class="col-md-6">
+                    <div class="profile-head">
+                                <h5>
+                                   <%= result.name %>
+                                </h5>
+                                <h6>
+                                  <%= result.stagename %>
+                                </h6>
+                                
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Social</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                  <% if (form){ %>
+                    <div class="col-md-2">
+                      <button class="edit-btn" id="delete">Delete</button >
+                    </div>
+                    <div class="col-md-2">
+                      <button class="edit-btn" id="edit">Edit</button>
+                    </div>
+                     
+                     <%}%>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><%= result.name %></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><%= result.email %></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Phone</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><%= result.phonenumber %></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Whats App</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><%= result.app %></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                          <label>Category</label>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <p><%= result.category %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Stagename</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><%= result.stagename %></p>
+                                    </div>
+                                </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Genre</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><%= result.genre %> <%= result.language %></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                          <label>Profile</label>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <p><%= result.address %></p>
+                                      </div>
+                                  </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Twitter</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><%= result.twitter %></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Facebook</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><%= result.facebook %></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Instagram</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><%= result.instagram %></p>
+                                        </div>
+                                    </div>
+                                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>           
+    </div>
+
+  <%} else { %>
+ 
+    <div id="data" data-id="<%= result.id %>"  data-name="<%= result.orgname %>"  data-companyname="<%= result.companyname %>" data-email="<%= result.orgemail %>" data-phone="<%= result.orgphonenumber %>" data-address="<%= result.orgaddress %>" data-category="<%= result.orgcategory %>"
+         data-website="<%= result.website %>"  data-twitter="<%= result.orgtwitter %>"  data-facebook ="<%= result.orgfacebook %>"  data-instagram="<%= result.orginstagram %>"  data-province="<%= result.orgprovince %>" >
+
+     </div>
+        <div class="container emp-profile">
+        
+            <div class="row">
+                
+                <div class="col-md-6">
+                    <div class="profile-head">
+                                <h5>
+                                   <%= result.companyname %>
+                                </h5>
+                                <h6>
+                                  <%= result.name %>
+                                </h6>
+                                
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Social</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                  <% if (form){ %>
+                    <div class="col-md-2">
+                      <button class="edit-btn" id="delete2">Delete</button >
+                    </div>
+                    <div class="col-md-2">
+                      <button class="edit-btn" id="edit2">Edit</button>
+                    </div>
+                     
+                     <%}%>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Company Name</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><%= result.companyname %></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><%= result.orgemail %></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Phone</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><%= result.orgphonenumber %></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                          <label>Category</label>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <p><%= result.orgcategory %></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Name of Director/Manager</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><%= result.orgname %></p>
+                                    </div>
+                                </div>
+                                    
+
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                          <label>Address</label>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <p><%= result.orgaddress %></p>
+                                      </div>
+                                  </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Company Website</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><a href="http//:<%= result.website %>" target="_blank"><%= result.website %></a></p>
+                                </div>
+                            </div>       
+                                 <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Twitter</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><a href="<%= result.orgtwitter %>" target="_blank"><%= result.orgtwitter %></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Facebook</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><a href="<%= result.orgfacebook %>" target="_blank"><%= result.orgfacebook %></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Instagram</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="<%= result.orginstagram %>" target="_blank"><%= result.orginstagram %></a>
+                                        </div>
+                                    </div>
+                                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>           
+    </div>
+ 
      <%}});%>
 
-     <script type="module">
-     import swal from 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.js'
-     window.onload = (event) => {
-   console.log("winloaded")
-   swal( "Your record is Safe !!!")
- }
-    let edit = document.getElementById("edit")
-    let man = document.getElementById("myDiv")
-    let name = man.getAttribute("data-name")
-    var id = man.getAttribute("data-id")
-    var deletes = document.getElementById("delete");
-    deletes.addEventListener("click", function(){
-     swal({title : "Are you sure you want to delete",
-           text: "Once deleted you will not be able to recover this record",
-          icon : "warning",
-           buttons : true,
-          dangerMode : true, 
-        })
-          .then((willDelete) => {
-          if(willDelete){
-          swal("Poof! Your record has been deleted", {icon : "sucess",});
-          location.assign("/delete/ " + id)
-          } else{
-            swal( "Your record is Safe !!!")
-          }
-          })
-      })
-   edit.addEventListener("click", function(){
-    const person = {
-      name : name,
-      id : id
-    }
-    window.localStorage.setItem('person', JSON.stringify(person));
-    location.assign("/edit")
-   })
+     <script src="/public/assets/details.js">
+     
      </script>
   </body>
 </html>

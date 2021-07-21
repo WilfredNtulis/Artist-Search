@@ -7,19 +7,43 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="public/assets/all.css">
+<link href="public/assets/search.css" rel="stylesheet">
 </head>
 <body>
 <!--====form section start====-->
-<nav><span class="whiteThing"><img src="https://urbanculxure.com/wp-content/uploads/2019/04/NACZ.jpg" id="image1"><span class="heading">Results</span></span></nav>
+<nav><span class="whiteThing"><a href="/"><img src="https://urbanculxure.com/wp-content/uploads/2019/04/NACZ.jpg" id="image1"></a><span class="heading">Results</span></span>
+  <span style="float:right;">
+    <% if (form){ %>
+      <a href="/form"><button type="button" class="btn btn-outline-primary">Form</button></a>
+      <a href="/logout"><button type="button" class="btn btn-outline-primary">Logout</button></a> 
+      <%} else {%>
+       <a href="/login"><button type="button" class="btn btn-outline-primary">Login</button></a> 
+       <%}%>
+      </span>
+  </nav> 
 <div class="container">
-<div id="result">Results(Nos of results)</div>
-<% results.forEach(function(result){ %>
- <div class="dotted">
- 	<div class="tops"><span id="full" class="labels"><%= result.name %></span><span id="stage" class="labels"><%= result.stagename %></span></div>
- 	<div class="tops"><span id="genre" class="labels"> <%= result.genre%></span><span id="contact" class="labels"> <%= result.phonenumber%></span></div>
- 	<div class="tops"><span id="province" class="labels"><%= result.province%></span><span id="email" class="labels">  <%= result.email%></span></div>
- </div>
- <%  }); %>
+  <% if (number) { %>
+    <div id="result">Results(Nos of results <%= number %>)</div>
+    
+    <%}%>
+  <ol>
+ 
+
+<% results.forEach(function(result){ %> 
+   
+ <% if(result.name != null) { %>
+
+    
+      <li id="each" data-id = "<%= result.id %>"><a href="/details/<%= result.id %>"><%= result.name %> , <%= result.genre %>, <%= result.province %> </a> </li>
+    
+    <hr>
+<%}else{%>
+  <li id="each" data-id = "<%= result.id %>"><a href="/orgdetails/<%= result.id %>"><%= result.companyname %> , <%= result.orgcategory %>, <%= result.orgprovince %> </a> </li>
+
+
+ <% } }); %>
+</ol>
 </div>
+
   </body>
 </html>
